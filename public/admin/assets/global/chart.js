@@ -1,0 +1,243 @@
+var chartData = [ {
+  "date": "2018-01-01",
+  "Lecture": 200,
+  "townName": "",
+  "townName2": "",
+  "townSize": 25,
+  "Answer": 185,
+  "Time": 60
+}, {
+  "date": "2018-01-09",
+  "Lecture": 220,
+  "townName": "",
+  "townSize": 14,
+  "Answer": 150,
+  "Time": 60
+}, {
+  "date": "2018-01-17",
+  "Lecture": 222,
+  "townName": "",
+  "townSize": 6,
+  "Answer": 120,
+  "Time": 120
+}, {
+  "date": "2018-01-24",
+  "Lecture": 100,
+  "townName": "",
+  "townSize": 7,
+  "Answer": 70,
+  "Time": 160
+}, {
+  "date": "2018-02-2",
+  "Lecture": 180,
+  "townName": "",
+  "townName2": "",
+  "townSize": 10,
+  "Answer": 27,
+  "Time": 160
+}, {
+  "date": "2018-02-10",
+  "Lecture": 164,
+  "townName": "",
+  "townSize": 7,
+  "Answer": 39,
+  "Time": 60
+}, {
+  "date": "2018-02-18",
+  "Lecture": 225,
+  "townName": "",
+  "townSize": 10,
+  "Answer": 22,
+  "Time": 60
+}, {
+  "date": "2018-02-19",
+  "Lecture": 93,
+  "townName": "",
+  "townName2": "",
+  "townSize": 16,
+  "Answer": 23,
+  "Time": 120
+}, {
+  "date": "2018-02-27",
+  "Lecture": 88,
+  "townName": "",
+  "townSize": 17,
+  "Answer": 25,
+  "Time": 60
+}, {
+  "date": "2018-03-5",
+  "Lecture": 104,
+  "townName": "",
+  "townSize": 11,
+  "Answer": 35,
+  "Time": 120
+}, {
+  "date": "2018-03-14",
+  "Lecture": 215,
+  "townName": "",
+  "townSize": 10,
+  "Answer": 50,
+  "Time": 150
+}, {
+  "date": "2018-03-22",
+  "Lecture": 132,
+  "townName": "",
+  "townName2": "",
+  "townSize": 18,
+  "Answer": 39,
+  "Time": 60
+}, {
+  "date": "2018-03-30",
+  "townName": "",
+  "townSize": 12,
+  "Lecture": 134,
+  "Time": 120,
+  "Answer": 40,
+  "alpha": 0.4
+}, {
+  "date": "2018-04-7",
+  "Answer": 36,
+  "Time": 120,
+  "Lecture": 205,
+  "townName": "",
+  "townName2": "",
+  "bulletClass": "lastBullet"
+}, {
+  "date": "2018-04-15"
+}, {
+  "date": "2018-04-22"
+}, {
+  "date": "2018-04-29"
+}, {
+  "date": "2018-05-09"
+}, {
+  "date": "2018-05-18"
+} ];
+var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "serial",
+  "theme": "light",
+
+  "dataDateFormat": "YYYY-MM-DD",
+  "dataProvider": chartData,
+
+  "addClassNames": true,
+  "startDuration": 1,
+  //"color": "#FFFFFF",
+  "marginLeft": 0,
+
+  "categoryField": "date",
+  "categoryAxis": {
+    "parseDates": true,
+    "minPeriod": "WW",
+    "autoGridCount": false,
+    "gridCount": 5,
+    "gridAlpha": 10,
+    "gridColor": "#FFFFFF",
+    "axisColor": "#555555",
+    "dateFormats": [ {
+      "period": 'DD',
+      "format": 'DD'
+    }, {
+      "period": 'WW',
+      "format": 'MMM DD'
+    }, {
+      "period": 'MM',
+      "format": 'MMM'
+    }, {
+      "period": 'YYYY',
+      "format": 'YYYY'
+    } ]
+  },
+
+  "valueAxes": [ {
+    "id": "a1",
+    "title": "Lecture",
+    "gridAlpha": 0,
+    "axisAlpha": 0
+  }, {
+    "id": "a2",
+    "position": "right",
+    "gridAlpha": 0,
+    "axisAlpha": 0,
+    "labelsEnabled": false
+  }, {
+    "id": "a3",
+    "title": "Time",
+    "position": "right",
+    "gridAlpha": 0,
+    "axisAlpha": 0,
+    "inside": true,
+    "duration": "mm",
+    "durationUnits": {
+      "DD": "d. ",
+      "hh": "h ",
+      "mm": "min",
+      "ss": ""
+    }
+  } ],
+  "graphs": [ {
+    "id": "g1",
+    "valueField": "Lecture",
+    "title": "Lecture",
+    "type": "column",
+    "fillAlphas": 0.9,
+    "valueAxis": "a1",
+    "balloonText": "[[value]] Students",
+    "legendValueText": "[[value]] Students",
+    "legendPeriodValueText": "total: [[value.sum]] Students",
+    "lineColor": "#263138",
+    "alphaField": "alpha"
+  }, {
+    "id": "g2",
+    "valueField": "Answer",
+    "classNameField": "bulletClass",
+    "title": "Answer/Quiz",
+    "type": "line",
+    "valueAxis": "a2",
+    "lineColor": "#786c56",
+    "lineThickness": 1,
+    "legendValueText": "[[value]]/[[description]]",
+    "descriptionField": "townName",
+    "bullet": "round",
+    "bulletSizeField": "townSize",
+    "bulletBorderColor": "#786c56",
+    "bulletBorderAlpha": 1,
+    "bulletBorderThickness": 2,
+    "bulletColor": "#000000",
+    "labelText": "[[townName2]]",
+    "labelPosition": "right",
+    "balloonText": "Correct Answers:[[value]]",
+    "showBalloon": true,
+    "animationPlayed": true
+  }, {
+    "id": "g3",
+    "title": "Time",
+    "valueField": "Time",
+    "type": "line",
+    "valueAxis": "a3",
+    "lineColor": "#ff5755",
+    "balloonText": "[[value]]",
+    "lineThickness": 1,
+    "legendValueText": "[[value]]",
+    "bullet": "square",
+    "bulletBorderColor": "#ff5755",
+    "bulletBorderThickness": 1,
+    "bulletBorderAlpha": 1,
+    "dashLengthField": "dashLength",
+    "animationPlayed": true
+  } ],
+
+  "chartCursor": {
+    "zoomable": false,
+    "categoryBalloonDateFormat": "DD",
+    "cursorAlpha": 0,
+    "valueBalloonsEnabled": false
+  },
+  "legend": {
+    "bulletType": "round",
+    "equalWidths": false,
+    "valueWidth": 250,
+    "useGraphSettings": true,
+    //"color": "#FFFFFF"
+  }
+} );
